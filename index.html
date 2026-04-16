@@ -1220,10 +1220,16 @@ async function fetchDriveFiles(folderId) {
     const files = data.files || [];
 
     // מיון: קבצים רגילים קודם (01,02,03...), קבצי F אחרון (F01,F02...)
-    // אם השם מתחיל ב-Picsart – מיון לפי תאריך יצירה
+    // מיון: ממוספרים קודם, "עותק של" ו-Picsart בסוף
     files.sort((a, b) => {
+        const isCopyA = /עותק של/i.test(a.name);
+        const isCopyB = /עותק של/i.test(b.name);
         const isPicsartA = /picsart/i.test(a.name);
         const isPicsartB = /picsart/i.test(b.name);
+        const isEndA = isCopyA || isPicsartA;
+        const isEndB = isCopyB || isPicsartB;
+        if (isEndA && !isEndB) return 1;
+        if (!isEndA && isEndB) return -1;
         if (isPicsartA && isPicsartB) {
             return new Date(a.createdTime) - new Date(b.createdTime);
         }
