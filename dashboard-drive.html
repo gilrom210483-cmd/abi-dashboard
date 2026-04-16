@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABI - חומרים שיווקיים</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #f4f4f6;
+            color: #111;
+            min-height: 100vh;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(201,168,76,0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f5ee 50%, #ffffff 100%);
+            padding: 24px 20px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 12px;
+            color: #c9a84c;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: #aaa;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .drive-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 6px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(66,133,244,0.08);
+            border: 1px solid rgba(66,133,244,0.15);
+            font-size: 10px;
+            color: #4285f4;
+            letter-spacing: 1px;
+        }
+
+        .main {
+            padding: 16px 18px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== TABS ========== */
+        .brand-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 4px;
+        }
+        .brand-tabs::-webkit-scrollbar { display: none; }
+
+        .brand-tab {
+            flex: 0 0 auto;
+            min-width: 80px;
+            padding: 13px 12px 11px;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(0,0,0,0.02);
+            color: #999;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Heebo', sans-serif;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .brand-tab::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .brand-tab.active {
+            border-color: rgba(201,168,76,0.3);
+            background: linear-gradient(145deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.02) 100%);
+            color: #c9a84c;
+            box-shadow: 0 4px 20px rgba(201,168,76,0.1);
+        }
+
+        .brand-tab.active::before { opacity: 1; }
+
+        .brand-name { display: block; font-size: 14px; margin-bottom: 2px; }
+        .brand-count { display: block; font-size: 10px; color: #bbb; font-weight: 400; }
+        .brand-tab.active .brand-count { color: rgba(201,168,76,0.6); }
+
+        .brand-tab.tab-equipment.active,
+        .brand-tab.tab-tools.active {
+            border-color: rgba(100,180,100,0.3);
+            background: linear-gradient(145deg, rgba(100,180,100,0.06) 0%, rgba(100,180,100,0.02) 100%);
+            color: #7bc97b;
+        }
+        .brand-tab.tab-equipment::before,
+        .brand-tab.tab-tools::before {
+            background: linear-gradient(90deg, transparent, #7bc97b, transparent);
+        }
+        .brand-tab.tab-equipment.active .brand-count,
+        .brand-tab.tab-tools.active .brand-count { color: rgba(100,180,100,0.6); }
+
+        .section-title {
+            font-size: 12px;
+            color: #bbb;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+
+        /* ========== PRODUCT GRID ========== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .product-card {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.07);
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .product-card:active {
+            border-color: rgba(201,168,76,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(201,168,76,0.12);
+        }
+
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.52);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+            background: #e0e0e0;
+        }
+
+        .product-placeholder {
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+        }
+
+        .product-info {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px;
+            z-index: 2;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 5px;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .product-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.65);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-packshot {
+            background: rgba(100,200,255,0.15);
+            color: #8ad4ff;
+            border: 1px solid rgba(100,200,255,0.2);
+        }
+
+        .badge-marketing {
+            background: rgba(201,168,76,0.15);
+            color: #c9a84c;
+            border: 1px solid rgba(201,168,76,0.2);
+        }
+
+        .badge-subcats {
+            background: rgba(180,120,255,0.15);
+            color: #c09aff;
+            border: 1px solid rgba(180,120,255,0.2);
+        }
+
+        /* ========== PAGES ========== */
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== BACK BAR ========== */
+        .back-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 0 12px;
+            cursor: pointer;
+        }
+
+        .back-arrow { font-size: 22px; color: #c9a84c; }
+        .back-text { font-size: 14px; color: #999; }
+
+        /* ========== PRODUCT PAGE TITLE ========== */
+        .product-page-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .product-page-sub {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* ========== TEXT-ONLY CARDS ========== */
+        .product-card.text-only::after { display: none; }
+
+        .text-only-inner {
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #eaeaf2, #e4e4ee);
+            text-align: center;
+            padding: 16px;
+            gap: 8px;
+        }
+
+        .product-card.text-only:active .text-only-inner {
+            background: linear-gradient(135deg, #e0e0ea, #dcdcea);
+        }
+
+        .text-only-icon { font-size: 32px; margin-bottom: 4px; }
+
+        .text-only-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #222;
+            line-height: 1.25;
+        }
+
+        .text-only-sub {
+            font-size: 11px;
+            color: rgba(0,0,0,0.4);
+            font-weight: 400;
+        }
+
+        /* ========== LOADING ========== */
+        .loading-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            gap: 16px;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(201,168,76,0.15);
+            border-top-color: #c9a84c;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-text {
+            font-size: 13px;
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        /* ========== DRIVE FILES GRID ========== */
+        .files-section { margin-bottom: 28px; }
+
+        .files-section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+        }
+
+        .files-section-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            background: rgba(66,133,244,0.07);
+        }
+
+        .files-section-title { font-size: 16px; font-weight: 600; color: #111; }
+        .files-section-count { font-size: 12px; color: #bbb; margin-right: auto; }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .drive-file-card {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .drive-file-card:active {
+            border-color: rgba(201,168,76,0.3);
+            transform: scale(0.97);
+        }
+
+        .drive-file-thumb {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+            background: #f0f0f0;
+        }
+
+        .drive-file-thumb-placeholder {
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0f0f8, #eaeaf5);
+            font-size: 28px;
+        }
+
+        .drive-file-name {
+            padding: 6px 8px;
+            font-size: 10px;
+            color: #999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            direction: ltr;
+            text-align: right;
+        }
+
+        /* ========== FOLDER CARD (when no API – direct link) ========== */
+        .folder-card {
+            background: #fff;
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 18px;
+            padding: 32px 20px;
+            text-align: center;
+            margin: 10px 0 20px;
+        }
+
+        .folder-card-icon { font-size: 52px; margin-bottom: 14px; }
+        .folder-card-title { font-size: 20px; font-weight: 700; color: #111; margin-bottom: 6px; }
+        .folder-card-sub { font-size: 13px; color: #999; margin-bottom: 24px; line-height: 1.5; }
+
+        .open-drive-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 28px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #c9a84c, #a88a3a);
+            color: #000;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            font-family: 'Heebo', sans-serif;
+            box-shadow: 0 4px 20px rgba(201,168,76,0.2);
+        }
+
+        .open-drive-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: rgba(66,133,244,0.07);
+            border: 1px solid rgba(66,133,244,0.15);
+            color: #4285f4;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        /* ========== SUB-CATEGORIES ========== */
+        .page-subcat .product-page-sub { margin-bottom: 28px; }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #c9a84c;
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 200;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ========== DIVIDER ========== */
+        .cat-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 4px 0 16px;
+            font-size: 11px;
+            color: #ccc;
+            letter-spacing: 1.5px;
+        }
+        .cat-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0,0,0,0.07);
+        }
+
+        /* ========== NO ACCESS INFO ========== */
+        .access-info {
+            background: rgba(66,133,244,0.05);
+            border: 1px solid rgba(66,133,244,0.12);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 12px;
+            color: #5a8dee;
+            line-height: 1.6;
+            margin-top: 16px;
+        }
+
+        @media (min-width: 500px) {
+            .products-grid { grid-template-columns: 1fr 1fr 1fr; }
+            .files-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>A B I</h1>
+    <p>חומרים שיווקיים</p>
+    <div class="drive-badge">🔗 מחובר לגוגל דרייב</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- HOME PAGE                                                     -->
+<!-- ============================================================ -->
+<div class="page active" id="page-home">
+<div class="main">
+
+    <div class="brand-tabs">
+        <div class="brand-tab active" onclick="showBrand('gello', this)">
+            <span class="brand-name">ג'לו</span>
+            <span class="brand-count">10 קטגוריות</span>
+        </div>
+        <div class="brand-tab" onclick="showBrand('addict', this)">
+            <span class="brand-name">אדיקט</span>
+            <span class="brand-count">7 קטגוריות</span>
+        </div>
+        <div class="brand-tab" onclick="showBrand('layla', this)">
+            <span class="brand-name">לילה</span>
+            <span class="brand-count">4 קטגוריות</span>
+        </div>
+        <div class="brand-tab tab-equipment" onclick="showBrand('equipment', this)">
+            <span class="brand-name">מכשור חשמלי</span>
+            <span class="brand-count">3 סוגים</span>
+        </div>
+        <div class="brand-tab tab-tools" onclick="showBrand('tools', this)">
+            <span class="brand-name">ציוד מניקור</span>
+            <span class="brand-count">6 סוגים</span>
+        </div>
+    </div>
+
+    <!-- ===== GELLO ===== -->
+    <div id="brand-gello" class="brand-section">
+        <div class="section-title">בחר קטגוריה · ג׳לו</div>
+        <div class="products-grid">
+
+            <div class="product-card" onclick="openProduct(0)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1--wApFALzx7W5MRjkxKOhs-yo18uw_fY&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">לק רגיל</div>
+                    <div class="product-sub">לק צבע רגיל</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openSubcats('gello-lakgel')">
+                <div class="product-badge"><span class="badge badge-subcats">3 סוגים ›</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1AZ99xBO7HXZRc4Pe5Nq6MUymN_AnTUNo&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">לק ג'ל</div>
+                    <div class="product-sub">צבעים / פלאש / פרנץ'</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(1)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1bXHveTUAQTGYX04cy3ioWmc9M3TqrKNN&sz=w400" alt="" style="object-fit:contain;background:#f5f5f5;padding:20px;">
+                <div class="product-info">
+                    <div class="product-name">לוגו</div>
+                    <div class="product-sub">קבצי לוגו</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(2)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1T1KBKMpGKTR7Ev5bmdEI_vNhpx-vLriF&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">קאבר בייס בקבוק</div>
+                    <div class="product-sub">15 מ"ל</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(50)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1Ri7FSUz_bMbQfEVfGW4PgzR4KrNgW6Wt&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">קאבר בייס צנצנת</div>
+                    <div class="product-sub">30 מ"ל</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openSubcats('gello-mekashrim')">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1Uv28vJuumI3LJROODuQJxxmL3CVm-DkR&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מקשרים</div>
+                    <div class="product-sub">4 קטגוריות</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(47)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1ZP355O0rOFlANBSzY4NhENg_iZ7aXcpz&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">פוליג'ל</div>
+                    <div class="product-sub">שפורפרת</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(4)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1ifhTqoBgvFVz5Cv1LGFjtKi_r7jjwr4X&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">ג'ל בנייה</div>
+                    <div class="product-sub">צנצנת</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(5)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=11JQ44i-lJWLdOI7xvJJZz29co4kUNviD&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">בילדר בייס</div>
+                    <div class="product-sub">בקבוק</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(6)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1Fm5OvbxJeLPy3Yp4wmOCsZQVqmCYfC-W&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מיניז</div>
+                    <div class="product-sub">בקבוקים קטנים</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(7)">
+                <div class="product-badge"><span class="badge badge-marketing">שיווקי</span></div>
+                <div class="product-placeholder" style="background:linear-gradient(135deg,#1a0a05,#2a1000,#1a0510);flex-direction:column;gap:8px;">
+                    <span style="font-size:38px;">🎬</span>
+                    <span style="font-size:11px;color:rgba(201,168,76,0.7);letter-spacing:1px;">35 ריל</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">חומרי שיווק</div>
+                    <div class="product-sub">סרטוני אינסטגרם</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== ADDICT ===== -->
+    <div id="brand-addict" class="brand-section" style="display:none">
+        <div class="section-title">בחר קטגוריה · אדיקט</div>
+        <div class="products-grid">
+
+            <div class="product-card" onclick="openProductFolders(10)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1H39qUx55C1wlRgshRLGFuFVDlfpRzTj5&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">פוליג'ל</div>
+                    <div class="product-sub">כל הגוונים</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(11)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=19rPIlHIAva265MYlKdcCLb-oSGUYtF6k&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">בילדר ג'ל</div>
+                    <div class="product-sub">צנצנות</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(12)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1iFFeZnT3MVq-Wofrr0WYH8fIN3lRf_nC&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">בילד איט אפ</div>
+                    <div class="product-sub">30 מ"ל</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(13)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1QatR0KnUgiry0hHBcyCsvhAEb8iWFzeJ&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">ראבר בייס</div>
+                    <div class="product-sub">צנצנת</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(131)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=19rPIlHIAva265MYlKdcCLb-oSGUYtF6k&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">ראבר בייס</div>
+                    <div class="product-sub">בקבוק</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(14)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1QTeb7aqZ0fRKS937ekz_hkTZvmk6L9C2&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">בייס וטופ</div>
+                    <div class="product-sub">אולטרבונד</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(15)">
+                <div class="product-badge"><span class="badge badge-marketing">שיווקי</span></div>
+                <div style="width:100%;aspect-ratio:1;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+                    <div style="font-size:15px;font-weight:700;color:#111;font-family:Heebo,sans-serif;">חומרי שיווק</div>
+                    <div style="font-size:11px;color:#666;font-family:Heebo,sans-serif;">תמונות וסרטונים</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(16)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=18WywinY0sMCMkfW0E1h7_6g_8315yJAl&sz=w400" alt="" style="object-fit:contain;background:#f5f5f5;">
+                <div class="product-info">
+                    <div class="product-name">לוגו</div>
+                    <div class="product-sub">קבצי לוגו</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(17)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1Rolbz1bUuvFHhpV-MO7ILa0D-5BKqIxS&sz=w400" alt="" style="object-fit:contain;background:#f5f5f5;">
+                <div class="product-info">
+                    <div class="product-name">צבעים</div>
+                    <div class="product-sub">120 גוונים</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== LAYLA ===== -->
+    <div id="brand-layla" class="brand-section" style="display:none">
+        <div class="section-title">בחר קטגוריה · לילה</div>
+        <div class="products-grid">
+
+            <div class="product-card" onclick="openProduct(20)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="layla/תמונות צבעי לילה מילאנו/1.jpg" alt="">
+                <div class="product-info">
+                    <div class="product-name">צבעי ג'ל</div>
+                    <div class="product-sub">כל הגוונים</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(21)">
+                <div class="product-badge"><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="layla/חומרים לפוסטים ומבצעים/בייס עם צבע 01.jpg" alt="">
+                <div class="product-info">
+                    <div class="product-name">חומרי שיווק</div>
+                    <div class="product-sub">פוסטים ומבצעים</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(22)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="layla/לוגו לילה מילאנו - צבעים/לוגו לילה מילאנו ללא רקע.png" alt="" style="object-fit:contain;background:#f5f5f5;">
+                <div class="product-info">
+                    <div class="product-name">לוגו</div>
+                    <div class="product-sub">בכל הצבעים</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(23)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="layla/פקשוט מוצרים/core image laylagel polish alibaba square.jpg" alt="">
+                <div class="product-info">
+                    <div class="product-name">מקשרים</div>
+                    <div class="product-sub">חומר מקשר</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== EQUIPMENT ===== -->
+    <div id="brand-equipment" class="brand-section" style="display:none">
+        <div class="section-title">בחר קטגוריה · מכשור חשמלי</div>
+        <div class="products-grid">
+
+            <div class="product-card text-only" onclick="openProduct(30)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">💡</div>
+                    <div class="text-only-name">מנורות</div>
+                    <div class="text-only-sub">ייבוש LED / UV</div>
+                </div>
+            </div>
+
+            <div class="product-card text-only" onclick="openProduct(31)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">⚙️</div>
+                    <div class="text-only-name">מכונות שיוף</div>
+                    <div class="text-only-sub">מכשיר שיוף</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(32)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="gello/שואב אבק/2.png" alt="">
+                <div class="product-info">
+                    <div class="product-name">שואבי אבק</div>
+                    <div class="product-sub">לאבק שיוף</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== TOOLS ===== -->
+    <div id="brand-tools" class="brand-section" style="display:none">
+        <div class="section-title">בחר קטגוריה · ציוד למניקור</div>
+        <div class="products-grid">
+
+            <div class="product-card text-only" onclick="openProduct(40)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">✂️</div>
+                    <div class="text-only-name">צבתיות</div>
+                    <div class="text-only-sub">כלי עבודה</div>
+                </div>
+            </div>
+
+            <div class="product-card text-only" onclick="openProduct(41)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">🔩</div>
+                    <div class="text-only-name">ראשי שיוף</div>
+                    <div class="text-only-sub">ביטים</div>
+                </div>
+            </div>
+
+            <div class="product-card text-only" onclick="openProduct(42)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">✂️</div>
+                    <div class="text-only-name">מספריים</div>
+                    <div class="text-only-sub">מקצועיים</div>
+                </div>
+            </div>
+
+            <div class="product-card text-only" onclick="openProduct(43)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">🖊️</div>
+                    <div class="text-only-name">דוחף עור</div>
+                    <div class="text-only-sub">כלי עבודה</div>
+                </div>
+            </div>
+
+            <div class="product-card text-only" onclick="openProduct(44)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">📋</div>
+                    <div class="text-only-name">פצירות</div>
+                    <div class="text-only-sub">מקצועיות</div>
+                </div>
+            </div>
+
+            <div class="product-card text-only" onclick="openProduct(45)">
+                <div class="text-only-inner">
+                    <div class="text-only-icon">🟫</div>
+                    <div class="text-only-name">באפרים</div>
+                    <div class="text-only-sub">מקצועיים</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SUB-CATEGORIES PAGE                                          -->
+<!-- ============================================================ -->
+<div class="page" id="page-subcat">
+<div class="main">
+    <div class="back-bar" onclick="goHome()">
+        <span class="back-arrow">→</span>
+        <span class="back-text">חזרה לג'לו</span>
+    </div>
+
+    <div class="product-page-title" id="subcat-title">לק ג'ל</div>
+    <div class="product-page-sub" id="subcat-brand">ג'לו · בחר תת-קטגוריה</div>
+
+    <div class="products-grid" id="subcat-grid"></div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PRODUCT PAGE (Drive connected)                               -->
+<!-- ============================================================ -->
+<div class="page" id="page-product">
+<div class="main">
+    <div class="back-bar" id="product-back-bar" onclick="goBack()">
+        <span class="back-arrow">→</span>
+        <span class="back-text" id="back-label">חזרה</span>
+    </div>
+
+    <div class="product-page-title" id="product-title"></div>
+    <div class="product-page-sub" id="product-brand"></div>
+
+    <!-- Content area – filled by JS -->
+    <div id="product-content"></div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PRODUCT SUB-FOLDERS PAGE                                     -->
+<!-- ============================================================ -->
+<div class="page" id="page-productfolders">
+<div class="main">
+    <div class="back-bar" onclick="goHome()">
+        <span class="back-arrow">→</span>
+        <span class="back-text" id="pf-back-label">חזרה</span>
+    </div>
+    <div class="product-page-title" id="pf-title"></div>
+    <div class="product-page-sub" id="pf-brand"></div>
+    <div class="products-grid" id="pf-grid"></div>
+</div>
+</div>
+
+<div class="toast" id="toast">✅ נפתח בדרייב!</div>
+
+<script>
+// ============================================================
+// DRIVE CONFIG – עדכן כאן את מזהי התיקיות
+// ============================================================
+const DRIVE_API_KEY = 'AIzaSyArQRALJMuOovkSqp-p9A2GRzMUDP6j1fM';
+
+// מזהי תיקיות הדרייב לכל מותג
+const DRIVE_BRAND_FOLDERS = {
+    gello:     '1WpdsFxRBJt-Tt5kvL-xP0iTIA1GTB3PB',
+    layla:     '1yvb42NWPZd9eZEPx3LATdseh62N8yKyd',
+    addict:    '12qKZQLHG_IhnwlznZm_3M_4PfADe-1Tk',
+    equipment: null,
+    tools:     null,
+};
+
+// קישורי דרייב ישירים לכל מותג
+const DRIVE_BRAND_LINKS = {
+    gello:     'https://drive.google.com/drive/folders/1WpdsFxRBJt-Tt5kvL-xP0iTIA1GTB3PB',
+    layla:     'https://drive.google.com/drive/folders/1yvb42NWPZd9eZEPx3LATdseh62N8yKyd',
+    addict:    'https://drive.google.com/drive/folders/12qKZQLHG_IhnwlznZm_3M_4PfADe-1Tk',
+    equipment: null,
+    tools:     null,
+};
+
+// ============================================================
+// PRODUCTS DATA
+// ============================================================
+const PRODUCTS = {
+    // GELLO – כל קטגוריה מחוברת לתיקייה הספציפית שלה
+    0:   { name: 'לק רגיל',          brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1AcDTKyXCj63CFW_NeWpGeu1arS5mu9sW' },
+    1:   { name: 'לוגו',              brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1bUoXCaqWhF0w8y2dugpsdPSxAE-USAwT' },
+    2:   { name: 'קאבר בייס בקבוק',   brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1vxkOBcgqgtaN8yOsu5o0Lm_juFw6L12T' },
+    50:  { name: 'קאבר בייס צנצנת',   brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1ynmSVFwycsRc5fDtAnXcN5GpzvzbrP22' },
+    31:  { name: 'סדרת קרטין',        brand: "ג'לו",           driveBrand: 'gello', driveFolder: '16zM_HTr_fKHFgfOwLOPJnNbaCUXWD2_u' },
+    32:  { name: 'פריימר',            brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1kzBCa8wGdj3Cr_bh4RHNrozBtbdJinWZ' },
+    33:  { name: 'אנטומי בייס',       brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1kU-DQp822-7a76UZufatnI6Pv1JFf4ly' },
+    34:  { name: 'קונקטור בייס',      brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1kFz7xiCJQBMHdNMeQiZi2FdATrxQEQVS' },
+    4:   { name: "ג'ל בנייה",         brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1-0NRnmifsUXVBh7s8sdHzKH5RH8OBclD' },
+    47:  { name: "פוליג'ל",           brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1DCP5Opy3ES7AroIqLxZPqQS4p9Y-bcoL' },
+    5:   { name: 'בילדר בייס',        brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1-0NRnmifsUXVBh7s8sdHzKH5RH8OBclD', subFolders: { packshot: '1-0NRnmifsUXVBh7s8sdHzKH5RH8OBclD', marketing: '1TCN0YS4GzPKK49LYgavr0AY17Ivi8k8h' } },
+    6:   { name: 'מיניז',             brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1Y1WTCME7L3BYZBsp4Umljyo0SOpEHWKk' },
+    7:   { name: 'חומרי שיווק',       brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1Z28E2Er9wyi0Lf2jM57j78HtqD_haIfn' },
+    // GELLO sub
+    8:   { name: 'צבעים',             brand: "ג'לו › לק ג'ל", driveBrand: 'gello', driveFolder: '1AQ6UKr8_EDEypKuu5efXeg5DU79-OCfl' },
+    9:   { name: 'פלאש',              brand: "ג'לו › לק ג'ל", driveBrand: 'gello', driveFolder: '1NtQ3eB-gbtbillL3w7UCwHlFuEO0iko7' },
+    91:  { name: "פרנץ'",             brand: "ג'לו › לק ג'ל", driveBrand: 'gello', driveFolder: '10mlhJfrWRP9DqPukiX6iotFiZP-llyc7' },
+    92:  { name: 'Cat-eye',           brand: "ג'לו › לק ג'ל", driveBrand: 'gello', driveFolder: '1DeT-WjegmBvQpU9b0hTxNFbjYO38z0bD' },
+    93:  { name: 'מזוודה',            brand: "ג'לו › לק ג'ל", driveBrand: 'gello', driveFolder: '1HNUZjWtXU2uPiroV6MDr12zdL5VJRnHi' },
+    // ADDICT
+    10:  { name: "פוליג'ל",           brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1u77g7Zvhz5EdS9PQg4hpHOcmpWUjmCDV', subFolders: { packshot: null, marketing: null } },
+    11:  { name: "בילדר ג'ל",         brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1NwNFegQ59jPOscD1JMyaR3U01df-7K7z', subFolders: { packshot: null, marketing: null } },
+    12:  { name: 'בילד איט אפ',       brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1o4Ef3GtEKvuuXXTkLffrLeF8pIbSlZjC', subFolders: { packshot: null, marketing: null } },
+    13:  { name: 'ראבר בייס צנצנת',   brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1xnbz_-7ZqtCKnzaLdG_jz56w_ZGfnRvM', subFolders: { packshot: null, marketing: null } },
+    131: { name: 'ראבר בייס בקבוק',   brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1NwNFegQ59jPOscD1JMyaR3U01df-7K7z', subFolders: { packshot: null, marketing: null } },
+    14:  { name: 'בייס וטופ',         brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1HeUabiVC-gE_Le1SWThfzhnpITVjU8ws', subFolders: { packshot: null, marketing: null } },
+    15:  { name: 'חומרי שיווק',       brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1VZNUxTtEoK3eZaEWbrS1l2Q8p2fjA96y' },
+    16:  { name: 'לוגו',              brand: 'אדיקט',          driveBrand: 'addict', driveFolder: null },
+    17:  { name: 'צבעים',            brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1LOhorAHkx7mRGbvUU8S0tDWSATSRtexq' },
+    // LAYLA
+    20:  { name: "צבעי ג'ל",          brand: 'לילה',           driveBrand: 'layla', driveFolder: '1khUjx_2LWX_6U7mEzlmfyHRc1oA2atxa' },
+    21:  { name: 'חומרי שיווק',       brand: 'לילה',           driveBrand: 'layla', driveFolder: null },
+    22:  { name: 'לוגו',              brand: 'לילה',           driveBrand: 'layla', driveFolder: '1fpsZstnikXBCQ9wxr0Xo3Sid8aPySVPI' },
+    23:  { name: 'מקשרים',            brand: 'לילה',           driveBrand: 'layla', driveFolder: '1zSnafsIhHft_AJxbR28XCcHo8TDPTGCF' },
+    // EQUIPMENT
+    30:  { name: 'מנורות',            brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1kFthJaPWrWMYkHBUTGvDVEdrAwBt5K35' },
+    31:  { name: 'מכונות שיוף',        brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1kFthJaPWrWMYkHBUTGvDVEdrAwBt5K35' },
+    32:  { name: 'שואבי אבק',         brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1kFthJaPWrWMYkHBUTGvDVEdrAwBt5K35' },
+    // TOOLS
+    40:  { name: 'צבתיות',            brand: 'ציוד למניקור',   driveBrand: 'gello', driveFolder: '1kCMb4Jw2J1LEg4L5_1cODwOuH8-naK1m' },
+    41:  { name: 'ראשי שיוף',         brand: 'ציוד למניקור',   driveBrand: 'gello', driveFolder: '1kCMb4Jw2J1LEg4L5_1cODwOuH8-naK1m' },
+    42:  { name: 'מספריים',           brand: 'ציוד למניקור',   driveBrand: 'gello', driveFolder: '1kCMb4Jw2J1LEg4L5_1cODwOuH8-naK1m' },
+    43:  { name: 'דוחף עור',          brand: 'ציוד למניקור',   driveBrand: 'gello', driveFolder: '1kCMb4Jw2J1LEg4L5_1cODwOuH8-naK1m' },
+    44:  { name: 'פצירות',            brand: 'ציוד למניקור',   driveBrand: 'gello', driveFolder: '1kCMb4Jw2J1LEg4L5_1cODwOuH8-naK1m' },
+    45:  { name: 'באפרים',            brand: 'ציוד למניקור',   driveBrand: 'gello', driveFolder: '1kCMb4Jw2J1LEg4L5_1cODwOuH8-naK1m' },
+};
+
+const SUBCATS = {
+    'gello-lakgel': {
+        title: "לק ג'ל",
+        brand: "ג'לו",
+        items: [
+            { productId: 8,  name: 'צבעים',   sub: 'כל הגוונים',      img: "gello/צבעים /Colors/gello colors/1.jpg" },
+            { productId: 9,  name: 'פלאש',    sub: 'נצנצים ומיוחדים', img: "gello/צבעים /Flash/תמונות וסרטונים /GelloFlash01.jpg" },
+            { productId: 91, name: "פרנץ'",   sub: "קולקציית פרנץ'",  img: "gello/צבעים /French Collection /פרנץ_ /F1.png" },
+            { productId: 92, name: 'Cat-eye', sub: 'קולקציית קט איי',  img: "" },
+            { productId: 93, name: 'מזוודה',  sub: 'סט מזוודה',        img: "" },
+        ]
+    },
+    'gello-mekashrim': {
+        title: 'מקשרים',
+        brand: "ג'לו",
+        items: [
+            { productId: 31, name: 'סדרת קרטין',  sub: 'קרטין',        img: "" },
+            { productId: 32, name: 'פריימר',       sub: 'פריימר',       img: "" },
+            { productId: 33, name: 'אנטומי בייס',  sub: 'ראבר בייס',   img: "" },
+            { productId: 34, name: 'קונקטור בייס', sub: 'קונקטור',      img: "" },
+        ]
+    }
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let prevPage = 'home';
+let currentFoldersProductId = null;
+let currentProductId = null;
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function showBrand(brand, el) {
+    document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.brand-section').forEach(s => s.style.display = 'none');
+    document.getElementById('brand-' + brand).style.display = 'block';
+}
+
+// ============================================================
+// SUB-CATEGORIES
+// ============================================================
+function openSubcats(key) {
+    const data = SUBCATS[key];
+    document.getElementById('subcat-title').textContent = data.title;
+    document.getElementById('subcat-brand').textContent = data.brand + ' · בחר תת-קטגוריה';
+
+    document.getElementById('subcat-grid').innerHTML = data.items.map(item => `
+        <div class="product-card" onclick="openProduct(${item.productId}, 'subcat')">
+            <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+            ${item.img
+                ? `<img class="product-img" src="${item.img}" alt="">`
+                : `<div class="product-placeholder" style="background:#eaeaf5">🎨</div>`}
+            <div class="product-info">
+                <div class="product-name">${item.name}</div>
+                <div class="product-sub">${item.sub}</div>
+            </div>
+        </div>
+    `).join('');
+
+    showPage('page-subcat');
+}
+
+// ============================================================
+// PRODUCT SUB-FOLDERS SELECTOR
+// ============================================================
+function openProductFolders(id) {
+    const p = PRODUCTS[id];
+    if (!p) return;
+
+    currentFoldersProductId = id;
+    prevPage = 'home';
+
+    document.getElementById('pf-title').textContent = p.name;
+    document.getElementById('pf-brand').textContent = p.brand;
+    document.getElementById('pf-back-label').textContent = 'חזרה';
+
+    const sub = p.subFolders || {};
+    const packId  = sub.packshot  || p.driveFolder;
+    const mktId   = sub.marketing || p.driveFolder;
+
+    document.getElementById('pf-grid').innerHTML = `
+        <div class="product-card" onclick="openProduct(${id}, 'productfolders', '${packId}')">
+            <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+            <div class="product-placeholder" style="background:linear-gradient(135deg,#0d1b2a,#1b2a3b);font-size:42px;flex-direction:column;gap:8px;">
+                <span>📷</span>
+                <span style="font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:1px;">${sub.packshot ? 'מחובר' : 'כל התמונות'}</span>
+            </div>
+            <div class="product-info">
+                <div class="product-name">פק שוט</div>
+                <div class="product-sub">${p.name}</div>
+            </div>
+        </div>
+        <div class="product-card" onclick="openProduct(${id}, 'productfolders', '${mktId}')">
+            <div class="product-badge"><span class="badge badge-marketing">שיווקי</span></div>
+            <div class="product-placeholder" style="background:linear-gradient(135deg,#1a0a05,#2a1000);font-size:42px;flex-direction:column;gap:8px;">
+                <span>🎬</span>
+                <span style="font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:1px;">${sub.marketing ? 'מחובר' : 'כל התמונות'}</span>
+            </div>
+            <div class="product-info">
+                <div class="product-name">חומר שיווקי</div>
+                <div class="product-sub">${p.name}</div>
+            </div>
+        </div>
+    `;
+
+    showPage('page-productfolders');
+}
+
+// ============================================================
+// PRODUCT PAGE – with Drive integration
+// ============================================================
+async function openProduct(id, from, overrideFolderId) {
+    const p = PRODUCTS[id];
+    if (!p) return;
+
+    prevPage = from || 'home';
+    currentProductId = id;
+    document.getElementById('product-title').textContent = p.name;
+    document.getElementById('product-brand').textContent = p.brand;
+    document.getElementById('back-label').textContent =
+        prevPage === 'subcat' ? 'חזרה ל' + document.getElementById('subcat-title').textContent : 'חזרה';
+
+    // Show loading
+    document.getElementById('product-content').innerHTML = `
+        <div class="loading-wrap">
+            <div class="spinner"></div>
+            <div class="loading-text">מחפש קבצים בדרייב...</div>
+        </div>
+    `;
+
+    showPage('page-product');
+
+    // Try Drive API – השתמש בתיקייה הספציפית אם יש, אחרת תיקיית המותג
+    const brandKey  = p.driveBrand;
+    const folderId  = overrideFolderId || p.driveFolder || DRIVE_BRAND_FOLDERS[brandKey];
+    const folderUrl = DRIVE_BRAND_LINKS[brandKey];
+
+    if (!folderId) {
+        renderNoFolder(p, brandKey);
+        return;
+    }
+
+    try {
+        const files = await fetchDriveFiles(folderId);
+        if (files && files.length > 0) {
+            renderDriveFiles(files, p, folderUrl);
+        } else {
+            renderFolderLink(p, folderUrl, brandKey, 'empty');
+        }
+    } catch (err) {
+        // API failed – show folder link button + error message
+        renderFolderLink(p, folderUrl, brandKey, 'error', err.message);
+    }
+}
+
+// ============================================================
+// DRIVE API CALL
+// ============================================================
+async function fetchDriveFiles(folderId) {
+    const q = encodeURIComponent(`'${folderId}' in parents and trashed = false`);
+    const fields = encodeURIComponent('files(id,name,mimeType,thumbnailLink,webViewLink,createdTime)');
+    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${DRIVE_API_KEY}&fields=${fields}&pageSize=100&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+
+    const res = await fetch(url);
+    if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        const errMsg = errData?.error?.message || res.status;
+        throw new Error(`Drive API error: ${res.status} – ${errMsg}`);
+    }
+    const data = await res.json();
+    const files = data.files || [];
+
+    // מיון: קבצים רגילים קודם (01,02,03...), קבצי F אחרון (F01,F02...)
+    // אם השם מתחיל ב-Picsart – מיון לפי תאריך יצירה
+    files.sort((a, b) => {
+        const isPicsartA = /picsart/i.test(a.name);
+        const isPicsartB = /picsart/i.test(b.name);
+        if (isPicsartA && isPicsartB) {
+            return new Date(a.createdTime) - new Date(b.createdTime);
+        }
+        const isFA = /f/i.test(a.name);
+        const isFB = /f/i.test(b.name);
+        if (isFA && !isFB) return 1;
+        if (!isFA && isFB) return -1;
+        const numA = parseInt((a.name.match(/\d+/) || ['0'])[0], 10);
+        const numB = parseInt((b.name.match(/\d+/) || ['0'])[0], 10);
+        if (numA !== numB) return numA - numB;
+        return a.name.localeCompare(b.name);
+    });
+
+    return files;
+}
+
+// ============================================================
+// RENDER: Drive files found
+// ============================================================
+function renderDriveFiles(files, product, folderUrl) {
+    const folders  = files.filter(f => f.mimeType === 'application/vnd.google-apps.folder');
+    const onlyFiles = files.filter(f => f.mimeType !== 'application/vnd.google-apps.folder');
+    const images = onlyFiles.filter(f => f.mimeType && f.mimeType.startsWith('image/'));
+    const videos = onlyFiles.filter(f => f.mimeType && f.mimeType.startsWith('video/'));
+    const others = onlyFiles.filter(f => f.mimeType && !f.mimeType.startsWith('image/') && !f.mimeType.startsWith('video/'));
+
+    let html = '';
+
+    // אם יש רק תיקיות – הצג אותן כקטגוריות לחיצות
+    if (onlyFiles.length === 0 && folders.length > 0) {
+        html = `<div class="products-grid">` +
+            folders.map(f => `
+                <div class="product-card text-only" onclick="openSubFolder('${f.id}', '${f.name.replace(/'/g, "\\'")}')">
+                    <div class="text-only-inner">
+                        <div class="text-only-icon">📁</div>
+                        <div class="text-only-name">${f.name}</div>
+                        <div class="text-only-sub">לחץ לפתיחה</div>
+                    </div>
+                </div>
+            `).join('') +
+        `</div>`;
+    } else {
+        if (images.length > 0) html += renderFilesSection('📸', 'תמונות', images.length + ' קבצים', images, 'image');
+        if (videos.length > 0) html += renderFilesSection('🎬', 'סרטונים', videos.length + ' קבצים', videos, 'video');
+        if (others.length > 0) html += renderFilesSection('📁', 'קבצים נוספים', others.length + ' קבצים', others, 'other');
+    }
+
+    if (folderUrl) {
+        html += `
+            <a class="open-drive-btn" href="${folderUrl}" target="_blank" style="display:flex;justify-content:center;margin-top:16px;">
+                📂 פתח תיקייה בדרייב
+            </a>
+        `;
+    }
+
+    document.getElementById('product-content').innerHTML = html;
+}
+
+// ============================================================
+// SUB-FOLDER NAVIGATION
+// ============================================================
+async function openSubFolder(folderId, folderName) {
+    document.getElementById('product-content').innerHTML = `
+        <div style="margin-bottom:16px;cursor:pointer;color:#c9a84c;font-size:14px;font-weight:600;" onclick="openProduct(${currentProductId}, prevPage)">← חזרה לקטגוריות</div>
+        <div class="loading-wrap"><div class="spinner"></div><div class="loading-text">טוען ${folderName}...</div></div>
+    `;
+
+    try {
+        const files = await fetchDriveFiles(folderId);
+        const onlyFiles = (files || []).filter(f => f.mimeType !== 'application/vnd.google-apps.folder');
+        const images = onlyFiles.filter(f => f.mimeType && f.mimeType.startsWith('image/'));
+        const videos = onlyFiles.filter(f => f.mimeType && f.mimeType.startsWith('video/'));
+        const others = onlyFiles.filter(f => f.mimeType && !f.mimeType.startsWith('image/') && !f.mimeType.startsWith('video/'));
+
+        let html = `<div style="margin-bottom:16px;cursor:pointer;color:#c9a84c;font-size:14px;font-weight:600;" onclick="openProduct(${currentProductId}, prevPage)">← חזרה לקטגוריות</div>`;
+        html += `<div style="font-size:18px;font-weight:700;margin-bottom:16px;color:#111;">${folderName}</div>`;
+
+        if (images.length > 0) html += renderFilesSection('📸', 'תמונות', images.length + ' קבצים', images, 'image');
+        if (videos.length > 0) html += renderFilesSection('🎬', 'סרטונים', videos.length + ' קבצים', videos, 'video');
+        if (others.length > 0) html += renderFilesSection('📁', 'קבצים נוספים', others.length + ' קבצים', others, 'other');
+
+        if (images.length === 0 && videos.length === 0 && others.length === 0) {
+            html += '<p style="color:#999;text-align:center;padding:40px;">לא נמצאו קבצים בתיקייה זו</p>';
+        }
+
+        document.getElementById('product-content').innerHTML = html;
+    } catch (err) {
+        document.getElementById('product-content').innerHTML = `
+            <div style="margin-bottom:16px;cursor:pointer;color:#c9a84c;font-size:14px;font-weight:600;" onclick="openProduct(${currentProductId}, prevPage)">← חזרה</div>
+            <p style="color:#c00;text-align:center;padding:40px;">שגיאה: ${err.message}</p>
+        `;
+    }
+}
+
+function renderFilesSection(icon, title, countText, files, type) {
+    const cards = files.map(f => {
+        const thumbSrc = `https://drive.google.com/thumbnail?id=${f.id}&sz=w400`;
+        const linkUrl  = f.webViewLink || `https://drive.google.com/file/d/${f.id}/view`;
+        const thumb    = type === 'image'
+            ? `<img class="drive-file-thumb" src="${thumbSrc}" alt="${f.name}" onerror="this.src='https://drive.google.com/thumbnail?id=${f.id}&sz=w400&authuser=0'; this.onerror=function(){this.parentElement.innerHTML='<div class=\\'drive-file-thumb-placeholder\\'>📷</div>'}">`
+            : type === 'video'
+            ? `<div class="drive-file-thumb-placeholder">▶️</div>`
+            : `<div class="drive-file-thumb-placeholder">📄</div>`;
+
+        return `
+            <a class="drive-file-card" href="${linkUrl}" target="_blank">
+                ${thumb}
+                <div class="drive-file-name">${f.name}</div>
+            </a>
+        `;
+    }).join('');
+
+    return `
+        <div class="files-section">
+            <div class="files-section-header">
+                <div class="files-section-icon">${icon}</div>
+                <div class="files-section-title">${title}</div>
+                <div class="files-section-count">${countText}</div>
+            </div>
+            <div class="files-grid">${cards}</div>
+        </div>
+    `;
+}
+
+// ============================================================
+// RENDER: Folder link (when API fails or folder is empty)
+// ============================================================
+function renderFolderLink(product, folderUrl, brandKey, reason, errMsg) {
+    const brandNames = { gello: "ג'לו", addict: 'אדיקט', layla: 'לילה' };
+    const brandName  = brandNames[brandKey] || brandKey;
+
+    const msgMap = {
+        error: 'הקבצים נמצאים בגוגל דרייב. לחץ על הכפתור כדי לפתוח את תיקיית ' + brandName + ' ולראות את כל הקבצים.',
+        empty: 'התיקייה ריקה כרגע. לחץ על הכפתור לפתיחת דרייב.',
+    };
+
+    const secondaryBtn = folderUrl ? `
+        <br>
+        <a class="open-drive-btn-secondary" href="${folderUrl}" target="_blank">
+            🔗 פתח ישירות בדרייב
+        </a>
+    ` : '';
+
+    const accessNote = reason === 'error' ? `
+        <div class="access-info">
+            💡 <strong>טיפ:</strong> כדי שהקבצים יופיעו ישירות כאן בדשבורד, יש לוודא שתיקיות הדרייב מוגדרות כ"פתוחות לכולם" (לא רק "לכל מי שיש לו קישור").
+        </div>
+    ` : '';
+
+    document.getElementById('product-content').innerHTML = `
+        <div class="folder-card">
+            <div class="folder-card-icon">📂</div>
+            <div class="folder-card-title">${product.name}</div>
+            <div class="folder-card-sub">${msgMap[reason] || ''}</div>
+            ${folderUrl ? `<a class="open-drive-btn" href="${folderUrl}" target="_blank">📂 פתח בדרייב – ${brandName}</a>` : ''}
+            ${secondaryBtn}
+        </div>
+        ${accessNote}
+        ${errMsg ? `<div style="margin-top:12px;padding:10px 14px;background:rgba(255,0,0,0.06);border:1px solid rgba(255,0,0,0.15);border-radius:10px;font-size:11px;color:#c00;direction:ltr;text-align:left;">⚠️ ${errMsg}</div>` : ''}
+    `;
+}
+
+// ============================================================
+// RENDER: No folder ID configured yet
+// ============================================================
+function renderNoFolder(product, brandKey) {
+    const noIdMsg = 'עדיין לא הוגדרה תיקיית דרייב לקטגוריה זו. ניתן להוסיף אותה בקובץ הקוד.';
+    document.getElementById('product-content').innerHTML = `
+        <div class="folder-card">
+            <div class="folder-card-icon">🗂️</div>
+            <div class="folder-card-title">${product.name}</div>
+            <div class="folder-card-sub">${noIdMsg}</div>
+        </div>
+    `;
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+function goBack() {
+    if (prevPage === 'subcat') {
+        showPage('page-subcat');
+    } else if (prevPage === 'productfolders') {
+        openProductFolders(currentFoldersProductId);
+    } else {
+        showPage('page-home');
+    }
+}
+
+function goHome() {
+    showPage('page-home');
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    if (msg) t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
