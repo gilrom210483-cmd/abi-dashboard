@@ -1208,7 +1208,7 @@ async function openProduct(id, from, overrideFolderId) {
 async function fetchDriveFiles(folderId) {
     const q = encodeURIComponent(`'${folderId}' in parents and trashed = false`);
     const fields = encodeURIComponent('files(id,name,mimeType,thumbnailLink,webViewLink,createdTime)');
-    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${DRIVE_API_KEY}&fields=${fields}&pageSize=100&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${DRIVE_API_KEY}&fields=${fields}&pageSize=1000&supportsAllDrives=true&includeItemsFromAllDrives=true`;
 
     const res = await fetch(url);
     if (!res.ok) {
