@@ -848,19 +848,21 @@
         <div class="section-title">בחר קטגוריה · מכשור חשמלי</div>
         <div class="products-grid">
 
-            <div class="product-card text-only" onclick="openSubcats('equipment-menorot')">
-                <div class="text-only-inner">
-                    <div class="text-only-icon">💡</div>
-                    <div class="text-only-name">מנורות ייבוש</div>
-                    <div class="text-only-sub">6 דגמים</div>
+            <div class="product-card" onclick="openSubcats('equipment-menorot')">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מנורות ייבוש</div>
+                    <div class="product-sub">6 דגמים</div>
                 </div>
             </div>
 
-            <div class="product-card text-only" onclick="openProduct(61)">
-                <div class="text-only-inner">
-                    <div class="text-only-icon">⚙️</div>
-                    <div class="text-only-name">מכונות שיוף</div>
-                    <div class="text-only-sub">מכשיר שיוף</div>
+            <div class="product-card" onclick="openSubcats('equipment-machonot')">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1EkoA-dvWBZmLe97mR2wXki7LlTFmZT7b&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מכונות שיוף</div>
+                    <div class="product-sub">2 דגמים</div>
                 </div>
             </div>
 
@@ -1061,6 +1063,8 @@ const PRODUCTS = {
     66:  { name: 'מנורת ייבוש איגלו', brand: 'מכשור חשמלי',   driveBrand: 'gello', driveFolder: '1edWCFxXbi0z1zJosv5mr_A22-vZTrE0A' },
     67:  { name: 'מנורת ייבוש סאן אדיקט', brand: 'מכשור חשמלי', driveBrand: 'gello', driveFolder: '1l9M4kVyXLIbpZETmDICKsDXjUHmu3XHk', subFolders: { packshot: '1l9M4kVyXLIbpZETmDICKsDXjUHmu3XHk', marketing: '1hoeGxjkW9RCMTiqBHVJpyXyk1Igc9Lxn' }, subFolderImages: { packshot: '1JkWNb_xaQ8ZhoZK7W2urXhspG_TLAYKs', marketing: '1iCL85ailQoH8_tnvbtjd2JewyO9Z6v3C' } },
     61:  { name: 'מכונות שיוף',        brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '11cpAbS8ZlvIRTlD1PHREWLIUY9IKH_xB' },
+    68:  { name: "מכונת שיוף נינג'ה", brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1JUQ-qIOwNVEhudswJprQbHVCXmamAV4S' },
+    69:  { name: 'מכונת שיוף קוברה',  brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1q1hrPgflL5raUz8e2EcnBKAdHBYtSpyK', subFolders: { packshot: '1q1hrPgflL5raUz8e2EcnBKAdHBYtSpyK', marketing: '1ZtMlTvBmQYMWFkYDsXKv5mYW4WkUHZOK' }, subFolderImages: { packshot: '1qjOrRhrya0SB46VXUZmvy0QJ9IFY437s', marketing: '1zbe9rtIZOVyTAnC1TujbduyjvL23PQrg' } },
     60:  { name: 'שואבי אבק',         brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1srCb62Ji7ihV7j46eKj1T6nRqzg4t1-T' },
     // TOOLS
     40:  { name: 'צבתיות',            brand: 'ציוד למניקור',   driveBrand: 'gello', driveFolder: '1kCMb4Jw2J1LEg4L5_1cODwOuH8-naK1m' },
@@ -1091,6 +1095,14 @@ const SUBCATS = {
             { productId: 32, name: 'פריימר',       sub: 'פריימר',       img: "" },
             { productId: 33, name: 'אנטומי בייס',  sub: 'ראבר בייס',   img: "" },
             { productId: 34, name: 'קונקטור בייס', sub: 'קונקטור',      img: "" },
+        ]
+    },
+    'equipment-machonot': {
+        title: 'מכונות שיוף',
+        brand: 'מכשור חשמלי',
+        items: [
+            { productId: 68, name: "מכונת שיוף נינג'ה", sub: 'מכונת שיוף', img: '1EkoA-dvWBZmLe97mR2wXki7LlTFmZT7b', isDrive: true },
+            { productId: 69, name: 'מכונת שיוף קוברה',  sub: 'מכונת שיוף', img: '1qjOrRhrya0SB46VXUZmvy0QJ9IFY437s', isDrive: true },
         ]
     },
     'equipment-menorot': {
