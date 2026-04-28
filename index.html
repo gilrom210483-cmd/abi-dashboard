@@ -848,11 +848,57 @@
         <div class="section-title">בחר קטגוריה · מכשור חשמלי</div>
         <div class="products-grid">
 
-            <div class="product-card text-only" onclick="openProduct(30)">
-                <div class="text-only-inner">
-                    <div class="text-only-icon">💡</div>
-                    <div class="text-only-name">מנורות</div>
-                    <div class="text-only-sub">ייבוש LED / UV</div>
+            <div class="product-card" onclick="openProductFolders(62)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1nxqsx2zE1-P1aJ3ejMI2HzLjTXwIRm9Q&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מנורת פיירבול</div>
+                    <div class="product-sub">LED / UV</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProduct(63)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=13ZBFqkLQq3HXoVRz6K-ODShlwcBEvkkv&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מנורה ורודה</div>
+                    <div class="product-sub">לילה מילאנו</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(64)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1HkuSCzeZLHD-lk3IK2ukb3C5eZGNRv_W&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מנורת סנו וויט</div>
+                    <div class="product-sub">LED / UV</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(65)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1grZx61e-AIWC1--wzqApUXa3mPjaQ1tw&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">פנס ייבוש</div>
+                    <div class="product-sub">LED / UV</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(66)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=197IMAPwBwAFrEFbdcSislq92_SO_qmAV&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מנורת ייבוש איגלו</div>
+                    <div class="product-sub">LED / UV</div>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openProductFolders(67)">
+                <div class="product-badge"><span class="badge badge-packshot">פקשוט</span><span class="badge badge-marketing">שיווקי</span></div>
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1JkWNb_xaQ8ZhoZK7W2urXhspG_TLAYKs&sz=w400" alt="">
+                <div class="product-info">
+                    <div class="product-name">מנורת ייבוש סאן</div>
+                    <div class="product-sub">אדיקט</div>
                 </div>
             </div>
 
@@ -1054,6 +1100,12 @@ const PRODUCTS = {
     23:  { name: 'מקשרים',            brand: 'לילה',           driveBrand: 'layla', driveFolder: '1zSnafsIhHft_AJxbR28XCcHo8TDPTGCF' },
     // EQUIPMENT
     30:  { name: 'מנורות',            brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1WY8TkotOy6gmK4AX_xHSGdFlnWcpPfRZ' },
+    62:  { name: 'מנורת פיירבול',    brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1A-iSXKLIFimNKAHq2FZgcseCM4vnaD6O', subFolders: { packshot: '1A-iSXKLIFimNKAHq2FZgcseCM4vnaD6O', marketing: '1zKgVWqBqE24BYeFpx7YfCkG2a-QaK_1n' }, subFolderImages: { packshot: '1nxqsx2zE1-P1aJ3ejMI2HzLjTXwIRm9Q', marketing: '1oY5NCVP3A-_H8_A9GROOqszB9NDBPbcJ' } },
+    63:  { name: 'מנורה ורודה לילה מילאנו', brand: 'מכשור חשמלי', driveBrand: 'gello', driveFolder: '1OG4WghxmiWlx9HTPc_2Gd9XauTHkI7r8' },
+    64:  { name: 'מנורת סנו וויט',   brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1PetSX22QXxqAc2PvW5IOLukVovJGwOi5', subFolders: { packshot: '1PetSX22QXxqAc2PvW5IOLukVovJGwOi5', marketing: '19SledxyFDiMO-GULUPXpYw1eT-kir486' }, subFolderImages: { packshot: '1rB-m2HrNecvYGWd41hfD1dziRLFVkjvv', marketing: '18EtM35GzmvcMH4JnTNMQ5knnYdwT9Nmy' } },
+    65:  { name: 'פנס ייבוש',        brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '15twaaqliqJujD_pWOk4vYMTVoVCzznQe', subFolders: { packshot: '15twaaqliqJujD_pWOk4vYMTVoVCzznQe', marketing: '17YjyYYhsO71JIyNcsuThaJ5INnmaW1-F' }, subFolderImages: { packshot: '1grZx61e-AIWC1--wzqApUXa3mPjaQ1tw', marketing: '1mxGQ1B18ruoLgTjpRwws3ifGb2URLNfd' } },
+    66:  { name: 'מנורת ייבוש איגלו', brand: 'מכשור חשמלי',   driveBrand: 'gello', driveFolder: '1edWCFxXbi0z1zJosv5mr_A22-vZTrE0A', subFolders: { packshot: '1edWCFxXbi0z1zJosv5mr_A22-vZTrE0A', marketing: '1rQGLuuutaSN4u70x2eAhpMUBu2Q2qVPD' }, subFolderImages: { packshot: '197IMAPwBwAFrEFbdcSislq92_SO_qmAV', marketing: '197IMAPwBwAFrEFbdcSislq92_SO_qmAV' } },
+    67:  { name: 'מנורת ייבוש סאן אדיקט', brand: 'מכשור חשמלי', driveBrand: 'gello', driveFolder: '1l9M4kVyXLIbpZETmDICKsDXjUHmu3XHk', subFolders: { packshot: '1l9M4kVyXLIbpZETmDICKsDXjUHmu3XHk', marketing: '1hoeGxjkW9RCMTiqBHVJpyXyk1Igc9Lxn' }, subFolderImages: { packshot: '1JkWNb_xaQ8ZhoZK7W2urXhspG_TLAYKs', marketing: '1iCL85ailQoH8_tnvbtjd2JewyO9Z6v3C' } },
     61:  { name: 'מכונות שיוף',        brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '11cpAbS8ZlvIRTlD1PHREWLIUY9IKH_xB' },
     60:  { name: 'שואבי אבק',         brand: 'מכשור חשמלי',    driveBrand: 'gello', driveFolder: '1srCb62Ji7ihV7j46eKj1T6nRqzg4t1-T' },
     // TOOLS
