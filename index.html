@@ -1013,6 +1013,15 @@ const PRODUCTS = {
     32:  { name: 'פריימר',            brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1kzBCa8wGdj3Cr_bh4RHNrozBtbdJinWZ' },
     33:  { name: 'אנטומי בייס',       brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1kU-DQp822-7a76UZufatnI6Pv1JFf4ly' },
     34:  { name: 'קונקטור בייס',      brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1kFz7xiCJQBMHdNMeQiZi2FdATrxQEQVS' },
+    35:  { name: 'טופים',             brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1jzPzYhBJkdRPz6CKDzf2srB3O8fJtXp5' },
+    350: { name: 'שימר טופ',         brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1cbJ-KWc3rNpuzFGYpFTuXM7LUKx7QtTw' },
+    351: { name: 'טופ חלבי',         brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1lbs-9_7PLGGXZvGwITu4LiXfSQQQ0iJ8' },
+    352: { name: 'טופ שברי זכוכית',  brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1lnqMk2h1kFQJHZ_PIfUmE8l0p7cvMUmC' },
+    353: { name: 'טופ עם נטרול',     brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1koqObSX4Ro3x-oDbAB2Ens27IYQR7nG_' },
+    354: { name: 'טופ עין החתול',    brand: "ג'לו",           driveBrand: 'gello', driveFolder: '150I6INlcRzFj-Ac90mldNDICiWDQQq_D' },
+    355: { name: 'טופ מאט',          brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1krxDKuts9ix7Jgrbu00hifGwO_1Lmxbb' },
+    356: { name: 'טופ ללא נטרול',    brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1kmSlZ3gfIQn9avEa03sbdUzhFeLTnEr5' },
+    357: { name: 'בראש טופ',         brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1l4ZRnmCUoACR2oGEYv18mW8RNKtgOuqZ' },
     4:   { name: "ג'ל בנייה",         brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1-0NRnmifsUXVBh7s8sdHzKH5RH8OBclD' },
     47:  { name: "פוליג'ל",           brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1-bET_zY2tqTjd4OHQs3fgctITp1H3WVw', subFolders: { packshot: '1-bET_zY2tqTjd4OHQs3fgctITp1H3WVw', marketing: '18C0xH780uovV7NnltBKy8wZ3fJKwVlEY' } },
     5:   { name: 'בילדר בייס',        brand: "ג'לו",           driveBrand: 'gello', driveFolder: '1i20xFPLYHpg2w84eh4a5cCScj2MCRGz3', subFolders: { packshot: '1i20xFPLYHpg2w84eh4a5cCScj2MCRGz3', marketing: '14dn63e35cpNXRxaC8rtutF6TYCcYflTz' } },
@@ -1083,6 +1092,21 @@ const SUBCATS = {
             { productId: 32, name: 'פריימר',       sub: 'פריימר',       img: "" },
             { productId: 33, name: 'אנטומי בייס',  sub: 'ראבר בייס',   img: "" },
             { productId: 34, name: 'קונקטור בייס', sub: 'קונקטור',      img: "" },
+            { productId: 35, name: 'טופים',         sub: '8 סוגים',      img: '1USWLpb2jHgVpMnxW2lPjRjbAmbMRk7EV', isDrive: true, action: "openSubcats('gello-topim')" },
+        ]
+    },
+    'gello-topim': {
+        title: 'טופים',
+        brand: "ג'לו",
+        items: [
+            { productId: 350, name: 'שימר טופ',         sub: 'טופ',  img: '1MPD1hLhZ_c3WaKg3DIa1ipjnzz2n0_GZ', isDrive: true },
+            { productId: 351, name: 'טופ חלבי',          sub: 'טופ',  img: '1V8qXGyA6ox_FECeMlhOgvulYjPem0jVG', isDrive: true },
+            { productId: 352, name: 'טופ שברי זכוכית',  sub: 'טופ',  img: '1uYhebNC4LF7r1UHsHKQGWfVNED2EHpfw', isDrive: true },
+            { productId: 353, name: 'טופ עם נטרול',      sub: 'טופ',  img: '1VG9xbtv3Vc290_Oq44Z5n1GHCX_PekIj', isDrive: true },
+            { productId: 354, name: 'טופ עין החתול',     sub: 'טופ',  img: '1R0jOTnd0UrChRuerq4EHExI8ZwibpYjj', isDrive: true },
+            { productId: 355, name: 'טופ מאט',           sub: 'טופ',  img: '1UdtbXJ4AqlBp-76h0OsqKA3xcCj0Jyw_', isDrive: true },
+            { productId: 356, name: 'טופ ללא נטרול',     sub: 'טופ',  img: '1USWLpb2jHgVpMnxW2lPjRjbAmbMRk7EV', isDrive: true },
+            { productId: 357, name: 'בראש טופ',          sub: 'טופ',  img: '1UfO045sGJn0x4hAYa3Xh-1R3_okT7FQY', isDrive: true },
         ]
     },
     'equipment-machonot': {
@@ -1135,9 +1159,11 @@ function openSubcats(key) {
     document.getElementById('subcat-grid').innerHTML = data.items.map(item => {
         const p = PRODUCTS[item.productId];
         const hasSubFolders = p && p.subFolders && (p.subFolders.packshot || p.subFolders.marketing);
-        const clickFn = hasSubFolders
-            ? `openProductFolders(${item.productId})`
-            : `openProduct(${item.productId}, 'subcat')`;
+        const clickFn = item.action
+            ? item.action
+            : hasSubFolders
+                ? `openProductFolders(${item.productId})`
+                : `openProduct(${item.productId}, 'subcat')`;
         const imgHtml = item.isDrive && item.img
             ? `<img class="product-img" src="https://drive.google.com/thumbnail?id=${item.img}&sz=w400" alt="">`
             : item.img
