@@ -744,12 +744,12 @@
                 </div>
             </div>
 
-            <div class="product-card" onclick="openProductFolders(14)">
+            <div class="product-card" onclick="openSubcats('addict-mekashrim')">
                 <div class="product-badge"><span class="badge badge-packshot">פקשוט</span></div>
-                <img class="product-img" src="https://drive.google.com/thumbnail?id=1QTeb7aqZ0fRKS937ekz_hkTZvmk6L9C2&sz=w400" alt="">
+                <img class="product-img" src="https://drive.google.com/thumbnail?id=1NlU319fx72qfGC0JVx8uMYoC0oPvsUtd&sz=w400" alt="">
                 <div class="product-info">
                     <div class="product-name">מקשרים</div>
-                    <div class="product-sub">אולטרבונד</div>
+                    <div class="product-sub">אולטראבונד · בייס ראבר · טופ · סטיי פוראבר</div>
                 </div>
             </div>
 
@@ -1042,7 +1042,11 @@ const PRODUCTS = {
     12:  { name: "ג'ל בנייה סקווייז 30 מל", brand: 'אדיקט',   driveBrand: 'addict', driveFolder: '1o4Ef3GtEKvuuXXTkLffrLeF8pIbSlZjC', subFolders: { packshot: '16HvIfObcJyaBEh1ttdgk4_IAIt2aOMAw', marketing: '1u_ngSpbdu6xyf7kV-z3fzC-JvB5ZqKDX' }, subFolderImages: { packshot: '19rPIlHIAva265MYlKdcCLb-oSGUYtF6k', marketing: '1cW_Ek1OYWM3o2Croe30J-njq58Z-_JBF' } },
     13:  { name: 'קולור בייס סקווייז 30 מ"ל', brand: 'אדיקט', driveBrand: 'addict', driveFolder: '1oITzRLNtBcZ9xkD4KgtTeKH7Dt0rA4i5', subFolders: { packshot: '1NpPDIGkC-C1ZUNYcyDv4D1REndOLYGBX', marketing: '1SjPPkcPlB673YlingUY73fXXeCUD3Ikq' }, subFolderImages: { packshot: '1uj3RJO41j0GQ4dlHUZgdozkM1t7JD11D', marketing: '17hkoMHvjyzkkKpvd48Luf5eMJQVRFAig' } },
     131: { name: 'קולור בייס בקבוק 15 מ"ל', brand: 'אדיקט',  driveBrand: 'addict', driveFolder: '1HdCAzrf6sCDQ1lMdIEHAsj26XwumkvVV', subFolders: { packshot: '1H6E8htxj0EU1T2HKNXi5rGQVs55Xy6J4', marketing: '1nmE-ypjV2jN6yzwintZrJPL1_j-WTmxY' }, subFolderImages: { packshot: '15f4yJIEH9YVJWOSQ-qXfLHtGEzpIZQmb', marketing: '1jbEJ2OA9ks80eKF41Fl8CVTmKtVqociM' } },
-    14:  { name: 'מקשרים',            brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1HeUabiVC-gE_Le1SWThfzhnpITVjU8ws', subFolders: { packshot: null, marketing: null } },
+    14:  { name: 'מקשרים',            brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1HeUabiVC-gE_Le1SWThfzhnpITVjU8ws' },
+    141: { name: 'אולטראבונד',        brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1QQmq_sEo1s-nY60Zwq0OdXMzyF7pdMQB', subFolderImages: { packshot: '1NlU319fx72qfGC0JVx8uMYoC0oPvsUtd' } },
+    142: { name: 'בייס ראבר',         brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1ngR2SFrz2YqwbYL4v6aM8BXWHb0gtN7A', subFolderImages: { packshot: '1QTeb7aqZ0fRKS937ekz_hkTZvmk6L9C2' } },
+    143: { name: 'טופ',               brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1AN88j53JXiJWEn6QZikQI6siEfwMPm-C', subFolderImages: { packshot: '1eck6Szqs2OepbYJnY7pZa33epLbiFPfn' } },
+    144: { name: 'סטיי פוראבר',       brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1EHHIGtL1Gsp6GxHAGvpemg-SyuiS6_Q-', subFolderImages: { packshot: '1k5_5N5eUPMueA9GiwWq1ymugg2q4BjPg' } },
     15:  { name: 'הסברים על המותג',   brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1VZNUxTtEoK3eZaEWbrS1l2Q8p2fjA96y' },
     16:  { name: 'לוגו',              brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1_Sek2Ng-NXv8YcVoRGGRgcXYD9jRHDin' },
     17:  { name: 'צבעים',            brand: 'אדיקט',          driveBrand: 'addict', driveFolder: '1LOhorAHkx7mRGbvUU8S0tDWSATSRtexq' },
@@ -1107,6 +1111,16 @@ const SUBCATS = {
             { productId: 355, name: 'טופ מאט',           sub: 'טופ',  img: '1UdtbXJ4AqlBp-76h0OsqKA3xcCj0Jyw_', isDrive: true },
             { productId: 356, name: 'טופ ללא נטרול',     sub: 'טופ',  img: '1USWLpb2jHgVpMnxW2lPjRjbAmbMRk7EV', isDrive: true },
             { productId: 357, name: 'בראש טופ',          sub: 'טופ',  img: '1UfO045sGJn0x4hAYa3Xh-1R3_okT7FQY', isDrive: true },
+        ]
+    },
+    'addict-mekashrim': {
+        title: 'מקשרים',
+        brand: 'אדיקט',
+        items: [
+            { productId: 141, name: 'אולטראבונד',  sub: 'מקשר',  img: '1NlU319fx72qfGC0JVx8uMYoC0oPvsUtd', isDrive: true },
+            { productId: 142, name: 'בייס ראבר',   sub: 'מקשר',  img: '1QTeb7aqZ0fRKS937ekz_hkTZvmk6L9C2', isDrive: true },
+            { productId: 143, name: 'טופ',          sub: 'מקשר',  img: '1eck6Szqs2OepbYJnY7pZa33epLbiFPfn', isDrive: true },
+            { productId: 144, name: 'סטיי פוראבר', sub: 'מקשר',  img: '1k5_5N5eUPMueA9GiwWq1ymugg2q4BjPg', isDrive: true },
         ]
     },
     'equipment-machonot': {
